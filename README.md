@@ -6,12 +6,35 @@ AI video model or paid generation API is required.
 
 ## Requirements and setup
 
-Use the Node.js version declared in `package.json` and install the locked
-dependencies:
+### New machine (Windows)
+
+1. Install [Git](https://git-scm.com/downloads), [Node.js 20+](https://nodejs.org)
+   and [Python 3.11](https://www.python.org/downloads/) (tick "Add python.exe to PATH").
+   Google Chrome or Microsoft Edge is used for rendering if present.
+2. Clone and run the one-time setup:
+
+   ```powershell
+   git clone https://github.com/Sai-Krupakar/Remotion-videos.git
+   cd Remotion-videos
+   powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+   ```
+
+   It installs the npm packages, creates `.venv-local-video` with Piper TTS,
+   downloads the six Piper voices into `voices/` (about 360 MB), and runs the
+   tests. Add `-WithLocalAI` to also install the experimental local AI video
+   packages, or `-SkipVoices` to skip the voice download. It is safe to re-run.
+3. Render a video: `npm run render -- --video little-seed --resolution portrait-720`
+
+Generated videos (`outputs/`), voices, Python and npm packages are not stored
+in Git; the setup script recreates them. The narration clips in `public/audio`
+are stored, so existing stories render without regenerating audio.
+
+### Everyday commands
 
 ```console
-npm install
-npm run dev
+npm run dev      # Remotion Studio preview
+npm test         # tests
+npm run lint     # ESLint + TypeScript
 ```
 
 The Remotion Studio lists the original `Logo`, `Title`, and `HelloWorld`
