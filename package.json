@@ -27,6 +27,8 @@
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
+    "typecheck": "tsc --noEmit",
+    "render": "node scripts/render.mjs",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"
   },

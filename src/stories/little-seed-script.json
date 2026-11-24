@@ -1,0 +1,237 @@
+{
+  "title": "The Little Seed Project",
+  "voice": "piper:en_US-ryan-medium",
+  "voiceSpeed": 1.05,
+  "pauseSeconds": 0.25,
+  "hero": { "characterType": "toon", "scale": 1.75 },
+  "places": {
+    "corner": {
+      "location": "sidewalk",
+      "props": [{ "id": "bed", "type": "garden-bed", "x": 0.66, "y": 0.8, "scale": 1.1 }]
+    },
+    "home": {
+      "location": "living-room",
+      "props": [
+        { "id": "sofa", "type": "sofa", "x": 0.72, "y": 0.71, "scale": 1.05 },
+        { "id": "plant", "type": "plant-pot", "x": 0.93, "y": 0.7, "scale": 0.75 }
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "id": "discovery",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "On a windy morning, a little seed landed beside a sidewalk.",
+          "move": "enter-left", "to": 0.3, "action": "idle", "expression": "neutral",
+          "camera": "prop", "tag": "One windy morning", "highlight": ["seed"],
+          "props": [{ "id": "seed", "keep": true, "type": "seed", "x": 0.66, "y": 0.79, "scale": 0.35, "from": [0.9, 0.25], "at": 2.4 }]
+        },
+        {
+          "text": "A stickman named Pip noticed it and stopped to look.",
+          "to": 0.45, "action": "surprised", "expression": "surprised",
+          "camera": "punch-in", "highlight": ["Pip"]
+        }
+      ]
+    },
+    {
+      "id": "idea",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "The street was gray, and the empty corner looked lonely.",
+          "action": "looking-around", "expression": "sad", "camera": "close-up", "highlight": ["lonely."]
+        },
+        {
+          "text": "Pip imagined a tiny garden where neighbors could pause and smile.",
+          "to": 0.3, "action": "thinking", "expression": "happy", "camera": "pull-out", "tag": "Imagine", "highlight": ["garden"],
+          "props": [
+            { "type": "flower", "x": 0.6, "y": 0.76, "scale": 0.8, "appear": 1.2 },
+            { "type": "flower", "x": 0.74, "y": 0.76, "scale": 0.7, "appear": 1.6 },
+            { "type": "bench", "x": 0.45, "y": 0.775, "scale": 0.7, "appear": 2.1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "place": "home",
+      "lines": [
+        {
+          "text": "Pip carried the seed home in a small paper box.",
+          "take": ["seed"],
+          "move": "enter-left", "to": 0.42, "action": "idle", "expression": "happy",
+          "camera": "follow", "highlight": ["box."],
+          "props": [{ "type": "box", "x": 0.42, "y": 0.6, "scale": 0.32, "carry": true }]
+        },
+        {
+          "text": "On a laptop, Pip searched for a simple way to begin.",
+          "to": 0.25, "action": "thinking", "expression": "thinking",
+          "camera": "prop", "tag": "How to grow a seed", "highlight": ["laptop,"],
+          "props": [
+            { "id": "table", "keep": true, "type": "table", "x": 0.52, "y": 0.73, "scale": 0.6 },
+            { "id": "laptop", "keep": true, "type": "laptop", "x": 0.52, "y": 0.665, "scale": 0.4 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prepare",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "The next morning, Pip found a sunny patch of soil.",
+          "move": "enter-left", "to": 0.35, "action": "pointing", "expression": "happy",
+          "camera": "push-in", "tag": "Next morning", "highlight": ["sunny"]
+        },
+        {
+          "text": "With careful hands, Pip made a little space for the seed.",
+          "to": 0.45, "action": "pointing", "expression": "thinking", "camera": "punch-in", "highlight": ["careful"]
+        }
+      ]
+    },
+    {
+      "id": "plant",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "Pip tucked the seed into the earth and covered it gently.",
+          "action": "pointing", "expression": "happy", "camera": "prop", "highlight": ["seed"],
+          "props": [{ "type": "seed", "x": 0.66, "y": 0.78, "scale": 0.3, "from": [0.56, 0.6], "at": 1.6 }]
+        },
+        {
+          "text": "Then came a little water, and a lot of hope.",
+          "action": "celebrating", "expression": "happy", "camera": "push-in", "highlight": ["hope."],
+          "props": [{ "type": "watering-can", "x": 0.6, "y": 0.66, "scale": 0.55, "rotation": -20, "appear": 0.4 }]
+        }
+      ]
+    },
+    {
+      "id": "waiting",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "After several days, nothing appeared above the soil.",
+          "action": "idle", "expression": "sad", "camera": "pull-out", "letterbox": true,
+          "tag": "Several days later", "highlight": ["nothing"]
+        },
+        {
+          "text": "Pip wondered whether such a small seed could do anything.",
+          "action": "thinking", "expression": "confused", "camera": "close-up", "letterbox": true, "highlight": ["small"]
+        }
+      ]
+    },
+    {
+      "id": "first-sprout",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "On the third morning, a tiny green sprout finally appeared.",
+          "action": "surprised", "expression": "surprised", "camera": "prop", "tag": "Day three", "highlight": ["sprout"],
+          "props": [{ "id": "plant-1", "keep": true, "type": "sprout", "x": 0.6, "y": 0.75, "scale": 0.8, "appear": 1.4 }]
+        },
+        {
+          "text": "Pip cheered so loudly that a passing neighbor came over.",
+          "to": 0.25, "action": "jumping", "expression": "laughing", "camera": "wide", "highlight": ["cheered"],
+          "cast": [{ "id": "neighbor", "x": 0.86, "enter": "right", "action": "waving", "expression": "surprised" }]
+        }
+      ]
+    },
+    {
+      "id": "neighbors",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "The neighbor brought another seed and offered to help.",
+          "action": "talking", "expression": "happy", "camera": "push-in", "highlight": ["help."],
+          "cast": [{ "id": "neighbor", "x": 0.86, "action": "talking", "expression": "happy" }]
+        },
+        {
+          "text": "Soon, two small plants were growing side by side.",
+          "action": "idle", "expression": "happy", "camera": "prop", "highlight": ["two"],
+          "props": [{ "id": "plant-2", "keep": true, "type": "sprout", "x": 0.73, "y": 0.75, "scale": 0.8, "appear": 0.8 }],
+          "cast": [{ "id": "neighbor", "x": 0.86, "action": "idle", "expression": "happy" }]
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "Each day, Pip and the neighbor checked their little garden.",
+          "move": "enter-left", "to": 0.25, "action": "pointing", "expression": "happy",
+          "camera": "pull-out", "tag": "Every day", "highlight": ["garden."],
+          "cast": [{ "id": "neighbor", "x": 0.86, "enter": "right", "action": "pointing", "expression": "happy" }]
+        },
+        {
+          "text": "They shared the watering and gave the sprouts room to grow.",
+          "action": "celebrating", "expression": "happy", "camera": "punch-in", "highlight": ["shared"],
+          "props": [{ "type": "watering-can", "x": 0.55, "y": 0.64, "scale": 0.55, "rotation": -25, "appear": 0.3 }],
+          "cast": [{ "id": "neighbor", "x": 0.86, "action": "talking", "expression": "happy" }]
+        }
+      ]
+    },
+    {
+      "id": "flowers",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "Weeks later, bright flowers opened in the morning sunshine.",
+          "to": 0.25, "action": "surprised", "expression": "happy", "camera": "pull-out",
+          "tag": "Weeks later", "highlight": ["flowers"],
+          "props": [
+            { "id": "plant-1", "keep": true, "type": "flower", "x": 0.6, "y": 0.76, "scale": 1, "appear": 0.6 },
+            { "id": "plant-2", "keep": true, "type": "flower", "x": 0.73, "y": 0.76, "scale": 1.15, "appear": 1.1 },
+            { "id": "plant-3", "keep": true, "type": "flower", "x": 0.67, "y": 0.77, "scale": 0.8, "appear": 1.6 }
+          ]
+        },
+        {
+          "text": "A curious bee arrived, followed by another tiny visitor.",
+          "action": "pointing", "expression": "surprised", "camera": "prop", "highlight": ["bee"],
+          "props": [
+            { "type": "bee", "x": 0.62, "y": 0.6, "scale": 0.45, "from": [-0.2, 0.4], "at": 2.6, "appear": 1.6 },
+            { "type": "bee", "x": 0.72, "y": 0.6, "scale": 0.5, "from": [1.25, 0.35], "at": 1.6 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "More neighbors noticed the colors and planted flowers of their own.",
+          "action": "pointing", "expression": "happy", "camera": "pull-out", "highlight": ["colors"],
+          "props": [
+            { "id": "street-flower-1", "keep": true, "type": "flower", "x": 0.08, "y": 0.75, "scale": 0.7, "appear": 0.8 },
+            { "id": "street-flower-2", "keep": true, "type": "flower", "x": 0.45, "y": 0.75, "scale": 0.75, "appear": 1.4 },
+            { "id": "street-flower-3", "keep": true, "type": "flower", "x": 0.94, "y": 0.75, "scale": 0.7, "appear": 2 }
+          ],
+          "cast": [{ "id": "neighbor", "x": 0.84, "enter": "right", "action": "waving", "expression": "happy" }]
+        },
+        {
+          "text": "The quiet corner became a place to meet and talk.",
+          "to": 0.2, "action": "talking", "expression": "happy", "camera": "push-in", "highlight": ["meet", "talk."],
+          "props": [{ "id": "bench", "keep": true, "type": "bench", "x": 0.36, "y": 0.775, "scale": 0.75, "appear": 0.3 }],
+          "cast": [{ "id": "neighbor", "x": 0.86, "action": "talking", "expression": "happy" }]
+        }
+      ]
+    },
+    {
+      "id": "ending",
+      "place": "corner",
+      "lines": [
+        {
+          "text": "Pip looked around and remembered the seed on the sidewalk.",
+          "to": 0.3, "action": "looking-around", "expression": "happy", "camera": "close-up", "letterbox": true, "highlight": ["seed"]
+        },
+        {
+          "text": "One small idea had given an entire neighborhood something to share.",
+          "action": "waving", "expression": "laughing", "camera": "pull-out", "tag": "The end", "highlight": ["share."]
+        }
+      ]
+    }
+  ]
+}

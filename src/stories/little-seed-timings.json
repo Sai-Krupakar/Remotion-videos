@@ -1,0 +1,86 @@
+[
+  {
+    "id": "discovery",
+    "durations": [
+      3.007,
+      2.659
+    ]
+  },
+  {
+    "id": "idea",
+    "durations": [
+      2.601,
+      3.251
+    ]
+  },
+  {
+    "id": "home",
+    "durations": [
+      2.473,
+      2.717
+    ]
+  },
+  {
+    "id": "prepare",
+    "durations": [
+      2.368,
+      2.589
+    ]
+  },
+  {
+    "id": "plant",
+    "durations": [
+      2.612,
+      1.81
+    ]
+  },
+  {
+    "id": "waiting",
+    "durations": [
+      2.496,
+      2.473
+    ]
+  },
+  {
+    "id": "first-sprout",
+    "durations": [
+      2.972,
+      2.624
+    ]
+  },
+  {
+    "id": "neighbors",
+    "durations": [
+      2.287,
+      2.473
+    ]
+  },
+  {
+    "id": "care",
+    "durations": [
+      2.624,
+      2.473
+    ]
+  },
+  {
+    "id": "flowers",
+    "durations": [
+      2.949,
+      3.158
+    ]
+  },
+  {
+    "id": "community",
+    "durations": [
+      2.879,
+      2.403
+    ]
+  },
+  {
+    "id": "ending",
+    "durations": [
+      2.624,
+      3.088
+    ]
+  }
+]
