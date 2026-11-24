@@ -192,6 +192,19 @@ export const RemotionRoot: React.FC = () => {
           calculateMetadata={calculateStoryMetadata}
         />
       </Folder>
+      <Folder name="Automation">
+        {/* Renders any built story passed with --props (used by scripts/pipeline.py). */}
+        <Composition
+          id="ScriptStory"
+          component={StoryVideo}
+          durationInFrames={3600}
+          fps={30}
+          width={1080}
+          height={1920}
+          defaultProps={{ story: littleSeedStory }}
+          calculateMetadata={calculateStoryMetadata}
+        />
+      </Folder>
     </>
   );
 };

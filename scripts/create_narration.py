@@ -130,10 +130,19 @@ def main() -> None:
         raise SystemExit("Narration already exists. Re-run with --overwrite to replace it.")
 
     story = json.loads(script_path.read_text(encoding="utf-8-sig"))
-    narrator = args.voice or story.get("voice") or DEFAULT_VOICE
-    base_speed = args.speed or story.get("voiceSpeed") or 1.0
+    generate_narration(story, audio_dir, timing_path, transcript_path, args.voice, args.speed)
+
+
+def generate_narration(
+    story: dict, audio_dir: Path, timing_path: Path, transcript_path: Path,
+    voice_override: str | None = None, speed_override: float | None = None,
+) -> list[dict]:
+    """Writes <sceneId>-<n>.wav clips, the timings JSON and a transcript; returns the timings."""
+    narrator = voice_override or story.get("voice") or DEFAULT_VOICE
+    base_speed = speed_override or story.get("voiceSpeed") or 1.0
     audio_dir.mkdir(parents=True, exist_ok=True)
     transcript_path.parent.mkdir(parents=True, exist_ok=True)
+    timing_path.parent.mkdir(parents=True, exist_ok=True)
 
     timings = []
     transcript = [story["title"], f"Narrator: {narrator} @ {base_speed}x", ""]
@@ -158,6 +167,7 @@ def main() -> None:
     transcript_path.write_text("\n".join(transcript) + "\n", encoding="utf-8")
     total = sum(sum(t["durations"]) for t in timings)
     print(f"Generated {sum(len(t['durations']) for t in timings)} lines, {total:.1f}s of speech.")
+    return timings
 
 
 if __name__ == "__main__":

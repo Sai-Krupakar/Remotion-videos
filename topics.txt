@@ -1,0 +1,2 @@
+# One video topic per line. Each run of scripts/pipeline.py uses the first topic and removes it after upload.
+# When no topics are left, the AI invents a new topic based on CHANNEL_THEME in .env.

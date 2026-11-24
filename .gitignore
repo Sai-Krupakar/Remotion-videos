@@ -9,3 +9,5 @@ outputs
 .venv-local-video/
 __pycache__/
 voices/
+.secrets/
+public/audio/auto/

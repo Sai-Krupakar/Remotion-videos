@@ -146,6 +146,60 @@ To create a new video in this style:
    `audio/<name>`, then register compositions in `src/Root.tsx` and the
    video ID in `scripts/render.mjs`.
 
+## Automated videos (AI script → YouTube)
+
+`npm run auto` (or `.venv-local-video\Scripts\python.exe scripts\pipeline.py`)
+does everything in one run:
+
+1. Picks a topic: `--topic "..."`, else the first line of `topics.txt`
+   (removed after a successful upload), else Gemini invents one from
+   `CHANNEL_THEME` while avoiding earlier titles.
+2. Gemini writes the script JSON. It is checked by `src/story/scriptValidation.ts`
+   (cameras, moves, places, continuity); errors are sent back to the AI, up to
+   4 attempts.
+3. Piper narrates it (default voice Ryan), then Remotion renders
+   `video.mp4` and `thumbnail.jpg` into `outputs/auto/<date>-<slug>/`.
+4. Uploads to YouTube as **public**, **not made for kids**, with title,
+   description and tags from the AI. Videos of 3 minutes or less get `#Shorts`.
+
+Useful flags: `--no-upload` (render only), `--topic "..."`,
+`--script-file my-script.json` (skip the AI), `--voice piper:en_US-amy-medium`,
+`--resolution 720`, `--auth-only` (only sign in to YouTube).
+
+### One-time setup
+
+1. **Gemini key (free):** create one at https://aistudio.google.com/apikey and
+   put it in `.env` as `GEMINI_API_KEY=...` (`setup.ps1` copies `.env.example`
+   to `.env`). On the free tier Google may use prompts to improve its products.
+2. **YouTube upload:**
+   - In https://console.cloud.google.com create a project and enable
+     **YouTube Data API v3**.
+   - Configure the OAuth consent screen (External) and add your Google account
+     as a **test user**.
+   - Create an OAuth client ID of type **Desktop app**, download the JSON and
+     save it as `.secrets/client_secret.json`.
+   - Run `npm run auto -- --auth-only` once and sign in with the channel's
+     account. The token is saved in `.secrets/youtube-token.json`.
+3. Test with `npm run auto -- --no-upload`, then run `npm run auto`.
+
+`.env`, `.secrets/` and `outputs/` are git-ignored; never commit them.
+
+### Run it on a schedule
+
+Windows Task Scheduler → Create Basic Task → Daily → Start a program:
+
+- Program: `C:\path\to\repo\.venv-local-video\Scripts\python.exe`
+- Arguments: `scripts\pipeline.py`
+- Start in: `C:\path\to\repo`
+
+### YouTube limits
+
+- API projects that Google has not audited can only upload **private** videos.
+  The pipeline warns if YouTube changed the privacy. Request the audit at
+  https://support.google.com/youtube/contact/yt_api_form to allow public uploads.
+- The default quota (10,000 units/day) allows about 6 uploads per day.
+- Custom thumbnails need a phone-verified channel; otherwise YouTube picks one.
+
 ## Experimental local AI video
 
 The separate `local-video` experiment accepts an English topic, writes a short

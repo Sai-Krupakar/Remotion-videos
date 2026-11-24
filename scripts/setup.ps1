@@ -60,6 +60,9 @@ Step 'Installing narration packages (Piper TTS)'
 & $venvPython -m pip install --upgrade pip --quiet --use-feature=truststore
 & $venvPython -m pip install -r (Join-Path $root 'scripts\requirements-narration.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Installing narration packages failed.' }
+& $venvPython -m pip install -r (Join-Path $root 'scripts\requirements-automation.txt')
+if ($LASTEXITCODE -ne 0) { throw 'Installing automation packages failed.' }
+if (-not (Test-Path (Join-Path $root '.env'))) { Copy-Item (Join-Path $root '.env.example') (Join-Path $root '.env') }
 
 if ($WithLocalAI) {
     Step 'Installing experimental local AI video packages (large download)'
@@ -105,3 +108,4 @@ if (-not $chrome) {
 Write-Host "`nSetup complete. Try:" -ForegroundColor Green
 Write-Host '  npm run dev                                                   # preview in Remotion Studio'
 Write-Host '  npm run render -- --video little-seed --resolution portrait-720'
+Write-Host '  Automatic videos: add GEMINI_API_KEY to .env, set up YouTube (README), then npm run auto'

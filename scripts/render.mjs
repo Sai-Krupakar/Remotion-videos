@@ -14,6 +14,8 @@ const options = {
   concurrency: "1",
   output: undefined,
   browserExecutable: undefined,
+  props: undefined,
+  frame: undefined,
 };
 
 for (let index = 2; index < process.argv.length; index += 1) {
@@ -33,6 +35,10 @@ for (let index = 2; index < process.argv.length; index += 1) {
     options.concurrency = value;
   } else if (flag === "--output") {
     options.output = value;
+  } else if (flag === "--props") {
+    options.props = value;
+  } else if (flag === "--frame") {
+    options.frame = value;
   } else if (flag === "--browser-executable") {
     options.browserExecutable = value;
   } else {
@@ -43,12 +49,18 @@ for (let index = 2; index < process.argv.length; index += 1) {
   index += 1;
 }
 
-if (!Object.hasOwn(resolutions["portrait-1080"], options.video)) {
+// --props renders any built story (see scripts/pipeline.py) with the generic ScriptStory composition.
+if (options.props && !options.output) {
+  console.error("--props requires --output.");
+  process.exit(1);
+}
+
+if (!options.props && !Object.hasOwn(resolutions["portrait-1080"], options.video)) {
   console.error(`Unknown video "${options.video}". Available: ${Object.keys(resolutions["portrait-1080"]).join(", ")}`);
   process.exit(1);
 }
 
-const composition = resolutions[options.resolution]?.[options.video];
+const composition = options.props ? "ScriptStory" : resolutions[options.resolution]?.[options.video];
 if (!composition) {
   console.error(
     `Unknown resolution "${options.resolution}". Choose: ${Object.keys(resolutions).join(", ")}`,
@@ -85,8 +97,10 @@ if (!existsSync(cli)) {
 
 mkdirSync(dirname(output), { recursive: true });
 
-console.log(`Rendering ${options.video} (${options.resolution}) to ${output}`);
-const renderArgs = [
+console.log(`Rendering ${options.props ?? `${options.video} (${options.resolution})`} to ${output}`);
+const renderArgs = options.frame
+  ? [cli, "still", "src/index.ts", composition, output, `--frame=${options.frame}`]
+  : [
     cli,
     "render",
     "src/index.ts",
@@ -95,6 +109,10 @@ const renderArgs = [
     "--codec=h264",
     `--concurrency=${concurrency}`,
   ];
+
+if (options.props) {
+  renderArgs.push(`--props=${resolve(options.props)}`);
+}
 
 if (browserExecutable) {
   renderArgs.push("--browser-executable", browserExecutable);
